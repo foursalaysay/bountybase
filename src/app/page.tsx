@@ -58,28 +58,6 @@ export default function Home() {
     }
   };
 
-  const lineVariants = {
-    hidden: { scaleX: 0 },
-    visible: { 
-      scaleX: 1,
-      transition: {
-        duration: 0.8,
-        delay: 0.5
-      }
-    }
-  };
-
-  // const verticalLineVariants = {
-  //   hidden: { scaleY: 0 },
-  //   visible: { 
-  //     scaleY: 1,
-  //     transition: {
-  //       duration: 0.5,
-  //       delay: 1.2
-  //     }
-  //   }
-  // };
-
   return (
     <div className="min-h-screen bg-[#0d1117] text-[#c9d1d9] overflow-x-hidden custom-scrollbar snap-scroll relative">
       {/* Background Effects */}
