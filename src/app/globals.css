@@ -2,6 +2,70 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 20px rgba(88, 166, 255, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 30px rgba(88, 166, 255, 0.8);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(20px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+  80% {
+    opacity: 0.9;
+    transform: scale(0.89);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+.animate-bounceIn {
+  animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -18,4 +82,88 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  /* Smooth scroll behavior for the entire page */
+  html {
+    scroll-behavior: smooth;
+    --scroll-behavior: smooth;
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #238636 #1c2128;
+    scroll-behavior: smooth;
+  }
+
+  /* Webkit scrollbar styles */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px; /* Slightly thinner for elegance */
+    height: 6px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #1c2128;
+    border-radius: 8px;
+    margin: 2px; /* Add some spacing */
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, #238636 0%, #2ea043 100%); /* Gradient for depth */
+    border-radius: 8px;
+    border: 1px solid #1c2128;
+    transition: all 0.3s ease;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, #2ea043 0%, #238636 100%);
+  }
+
+  /* Firefox scrollbar styles */
+  @supports (scrollbar-color: #238636 #1c2128) {
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #238636 #1c2128;
+    }
+  }
+
+  /* Hide scrollbar when not scrolling but keep functionality */
+  .custom-scrollbar {
+    &::-webkit-scrollbar-thumb {
+      opacity: 0;
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+      opacity: 1;
+    }
+  }
+
+  /* Smooth scroll snapping */
+  .snap-scroll {
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+  }
+
+  .snap-scroll > section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+/* Add smooth transitions for all interactive elements */
+* {
+  transition: background-color 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+/* Optimize performance */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Prevent content shift on scrollbar appearance */
+html {
+  scrollbar-gutter: stable;
 }
